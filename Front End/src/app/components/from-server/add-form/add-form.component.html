@@ -1,0 +1,204 @@
+<div class="float-left m-0 flex max-w-md items-center pt-32 pb-10 h-screen w-1/4 overflow-y-scroll">
+  <div class="bg-white shadow-md px-8 pt-6 pb-8 m-4 rounded-r-3xl ">
+    <div class="mb-4">
+      <h1 class="text-2xl font-bold mb-2">Add Employee</h1>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+      <div
+        *ngIf="this.role?.touched && this.role?.invalid"
+        class="bg-red-200 text-red-900 text-center"
+      >
+        <div>Role is required !!!</div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="role">
+          Role
+        </label>
+        <select
+          id="role"
+          name="role"
+          formControlName="role"
+          class="shadow appearance-none border rounded w-full
+           py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        >
+          <option value="">Select Role First</option>
+          <option *ngFor="let rol of this.rolesArray">
+            {{ rol }}
+          </option>
+        </select>
+      </div>
+
+      <div
+        *ngIf="this.reportsTo?.touched && this.reportsTo?.invalid"
+        class="bg-red-200 text-red-900 text-center"
+      >
+        <div>Unselected !!!</div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="reports-to">
+          Reports To
+        </label>
+        <select
+          id="reports-to"
+          name="reports-to"
+          class="shadow appearance-none border rounded
+           w-full py-2 px-3 text-gray-700 leading-tight
+           focus:outline-none focus:shadow-outline"
+          formControlName="reportsTo"
+        >
+          <!-- Add your options here -->
+          <option value="">Select Employee</option>
+          <option *ngFor="let report of reportsToArray">{{ report }}</option>
+        </select>
+      </div>
+
+      <div
+        *ngIf="this.name?.touched && this.name?.invalid"
+        class="bg-red-200 text-red-900 text-center"
+      >
+        <div>Name is required !!!</div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          Name
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter name"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+
+      <div
+        *ngIf="this.email?.touched && this.email?.invalid"
+        class="bg-red-200 text-red-900 text-center"
+      >
+        <div>Employee's email is required !!!</div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="email">
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Enter email"
+          formControlName="email"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+
+      <div
+        *ngIf="this.imageUrl?.touched && this.imageUrl?.invalid"
+        class="bg-red-200 text-red-900 text-center"
+      >
+        <div>Employee's Picture is required !!!</div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="image-url">
+          Image URL
+        </label>
+        <input
+          id="image-url"
+          name="image-url"
+          type="url"
+          placeholder="Enter image URL"
+          formControlName="imageUrl"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+
+      <div
+        *ngIf="this.tel?.touched && this.tel?.invalid"
+        class="bg-red-200 text-red-900 text-center"
+      >
+        <div>Employee's phone number is required !!!</div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="tel">
+          Tel.
+        </label>
+        <input
+          id="tel"
+          name="tel"
+          type="tel"
+          placeholder="Enter image URL"
+          formControlName="tel"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+
+      <div class="flex items-center justify-center">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+        >
+          Save
+        </button>
+      </div>
+     </form>
+    <div class="bg-blue-100 shadow-lg px-8 pt-6 pb-8 rounded-r-4xl">
+      <div
+        class="flex items-center justify-center w-10 bg-blue-500 rounded-full"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="white"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 16v-4"></path>
+          <path d="M12 8h.01"></path>
+        </svg>
+      </div>
+      <h2 class="text-lg font-bold">New Role ???</h2>
+       <form (ngSubmit)="addRole()" class="mb-4">
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="roleToAdd">
+            Name of the Role
+          </label>
+          <input class="shadow appearance-none border
+          rounded w-full py-2 px-3 text-gray-700 leading-tight
+           focus:outline-none focus:shadow-outline"
+           id="roleToAdd"
+           type="text"
+           name="name"
+           placeholder="Enter role"
+           [(ngModel)]="this.roleTobeAdded">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="reportTo">
+            Reports To
+          </label>
+          <select class="shadow appearance-none border rounded w-full
+           py-2 px-3 text-gray-700 leading-tight focus:outline-none
+           focus:shadow-outline"
+           id="reportTo"
+           name="reportTo"
+           [(ngModel)]="this.reportsToAdd">
+          <option value="">Select Role First</option>
+          <option *ngFor="let rol of this.rolesArray">
+            {{ rol }}
+          </option>
+          </select>
+        </div>
+        <div class="flex items-center justify-between">
+          <button class="bg-blue-500 hover:bg-blue-700
+          text-white font-bold py-2 px-4 rounded
+          focus:outline-none focus:shadow-outline" type="button"
+          (click)="this.addRole()">
+            Add Role
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+ </div>

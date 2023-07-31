@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "DataBase2",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}
