@@ -1,5 +1,7 @@
 # FullStack-Employee-Management-System
-### Full Stack application made by Angular (The Front End) and nestjs (The Back End) frameworks
+
+### Full Stack application made by Angular (The Front End) and Nestjs (The Back End) frameworks
+
 ![Overview of the project](https://github.com/yabulala432/FullStack-Employee-Management-System/blob/main/screeshots/screenShot1.png)
 
 ![Overview of the project](https://github.com/yabulala432/FullStack-Employee-Management-System/blob/main/screeshots/screenShot2.png)
