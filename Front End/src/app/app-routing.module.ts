@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FromServerComponent } from './components/from-server/from-server.component';
+import { Routes, RouterModule } from '@angular/router';
+import { MainScreenComponent } from './components/main-screen/main-screen.component';
+import { UpdateEmployeeComponent } from './components/update-employee/update-employee.component';
+import { InfoEmployeeComponent } from './components/info-employee/info-employee.component';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { GraphComponent } from './components/graph/graph.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'from-server', pathMatch: 'full' },
-  { path: 'from-server', component: FromServerComponent },
+  { path: '', component: MainScreenComponent },
+  // {path: 'view-employee', component: ViewComponent},
+  { path: 'view-employee', component: GraphComponent },
+  { path: 'update-employee', component: UpdateEmployeeComponent },
+  { path: 'info-employee', component: InfoEmployeeComponent },
+  { path: 'add-employee', component: AddEmployeeComponent },
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [RouterModule.forRoot(routes), CommonModule],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

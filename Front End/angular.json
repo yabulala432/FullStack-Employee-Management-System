@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "DataBase2": {
+    "untitled1": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/data-base2",
+            "outputPath": "dist/untitled1",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -22,13 +22,20 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/theme.less",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/balkanapp/orgchart.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -61,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DataBase2:build:production"
+              "browserTarget": "untitled1:build:production"
             },
             "development": {
-              "browserTarget": "DataBase2:build:development"
+              "browserTarget": "untitled1:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DataBase2:build"
+            "browserTarget": "untitled1:build"
           }
         },
         "test": {
@@ -88,23 +95,15 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
-          }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "version": 2,
-            "browserTarget": "DataBase2:build:production"
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": "72832e64-9ed5-4879-9e3d-24f6492dac24"
+    "analytics": false
   }
 }

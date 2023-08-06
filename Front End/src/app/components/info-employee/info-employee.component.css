@@ -1,0 +1,14 @@
+img{
+    width:350px;
+    height:180px;
+    border-radius: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    padding: 5px;
+    background-color: #fff;
+    display: inline-block;
+    vertical-align: top;
+    /* :'cover' */
+    object-fit: contain;
+}

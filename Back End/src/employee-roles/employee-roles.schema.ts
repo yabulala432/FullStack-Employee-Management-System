@@ -4,6 +4,7 @@ import { Document } from "mongoose";
 
 export interface EmployeeRoles {
   role: string;
+  worksUnder:string[];
 }
 
 @Schema()
@@ -17,7 +18,7 @@ export class EmployeeRoles extends Document {
   @IsAlpha()
   @IsNotEmpty()
   @IsUppercase()
-  worksUnder: string;
+  worksUnder: string[];
 }
 
 export const EmployeeRolesSchema = SchemaFactory.createForClass(EmployeeRoles);

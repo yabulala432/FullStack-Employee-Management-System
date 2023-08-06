@@ -1,1 +1,51 @@
-<router-outlet></router-outlet>
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a routerLink="/">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>Employee Management</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-submenu nzOpen nzTitle="Employee" nzIcon="user-add">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/view-employee">Chart-View</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/add-employee">Add Employee</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="info-employee">Employee Info</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="update-employee">Update(Advanced)</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <span class="trigger"
+                  nz-icon
+                  [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            ></span>
+        </span>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content w-full 
+       items-center h-full overflow-y-scroll overflow-x-scroll">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

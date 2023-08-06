@@ -1,0 +1,93 @@
+nz-radio-group {
+  float: right;
+}
+
+button {
+  margin-right: 12px;
+}
+
+nz-graph {
+  height: 400px;
+}
+
+.graph-node {
+  border: 1px solid #8cc8ff;
+  cursor: pointer;
+  font-size: 12px;
+  height: 100%;
+  line-height: 1.2;
+  border-radius: 0;
+  text-align: center;
+  word-break: break-all;
+  display: block;
+}
+
+.group-node {
+  border-width: 4px;
+}
+
+.leaf-node {
+  color: #1a90ff;
+  background: rgba(26, 144, 255, 0.15);
+  min-height: 30px;
+  height: fit-content;
+}
+
+.title {
+  padding: 4px;
+  word-break: keep-all;
+}
+
+nz-graph .graph-edge path {
+  stroke: #e80d0d;
+  stroke-width: 1.5px;
+}
+
+nz-graph .graph-edge:hover path {
+  stroke: #4bc1e6;
+}
+
+.nz-graph-edges{
+  color: blue;
+}
+
+path svg  {
+  color: #1a90ff;
+}
+
+.page-container {
+  display: flex;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.page {
+  flex: 0 0 100%;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  opacity: 1;
+}
+
+.page-turn {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition-delay: 0.5s;
+}
+
+.slide-animation {
+  animation-name: slide;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+*{
+  color: #fff;
+}

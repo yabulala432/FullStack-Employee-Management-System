@@ -1,0 +1,34 @@
+<div>
+    <button (click)="this.togglePage()"
+        class="px-3 py-1 float-right text-sm font-medium
+         text-white bg-orange-500 rounded-md
+          hover:bg-orange-600 focus:outline-none">
+        Another View
+    </button>
+
+   
+
+<div *ngIf="currentPage === 'page2'" class="page page2 h-full" [ngClass]="{'slide-animation': currentPage !== previousPage}">
+    <h1 class="text-2xl text-white">View Two</h1>
+    <app-balkan-graph></app-balkan-graph>
+</div>
+
+<div *ngIf="currentPage === 'page1'"
+    class="page page1 h-full" 
+    [ngClass]="{'slide-animation': currentPage !== previousPage}">
+    <h1 class="text-2xl text-white font-serif">View One</h1>
+    
+    <nz-radio-group 
+    [(ngModel)]="this.defaultOrientation" 
+    (ngModelChange)="onRadioChange()" >
+        <label nz-radio
+        *ngFor="let option of radioOptions" 
+        class="text-white float-right" 
+        [nzValue]="option.value">
+            {{ option.label }}
+        </label>
+    </nz-radio-group>
+
+    <div echarts [options]="options" [initOpts]="initOpts"></div>
+</div>
+</div>
