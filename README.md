@@ -10,4 +10,4 @@
 
 ![Overview of the project](https://github.com/yabulala432/FullStack-Employee-Management-System/blob/main/screeshots/screenShot4.png)
 
-![Overview of the project](https://github.com/yabulala432/FullStack-Employee-Management-System/blob/main/screeshots/screenShot5.png)
+![Overview of the project](https://github.com/yabulala432/FullStack-Employee-Management-System/blob/main/screeshots/screenShotFinal.png)
