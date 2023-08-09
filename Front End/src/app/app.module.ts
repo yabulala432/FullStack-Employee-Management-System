@@ -2,6 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { TreeViewComponent } from './components/tree-view/tree-view.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { uk_UA } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
@@ -19,7 +20,6 @@ import { NzGraphModule } from 'ng-zorro-antd/graph';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { InfoEmployeeComponent } from './components/info-employee/info-employee.component';
-import { MainScreenComponent } from './components/main-screen/main-screen.component';
 import { UpdateEmployeeComponent } from './components/update-employee/update-employee.component';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -33,6 +33,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { BalkanGraphComponent } from './components/graph/balkan-graph/balkan-graph.component';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 registerLocaleData(uk);
+import { NzListModule } from 'ng-zorro-antd/list';
 
 // @ts-ignore
 @NgModule({
@@ -41,10 +42,10 @@ registerLocaleData(uk);
     AppComponent,
     AddEmployeeComponent,
     InfoEmployeeComponent,
-    MainScreenComponent,
     UpdateEmployeeComponent,
     GraphComponent,
     BalkanGraphComponent,
+    TreeViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +61,7 @@ registerLocaleData(uk);
     NzRadioModule,
     NzButtonModule,
     NzTreeModule,
+    NzListModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),

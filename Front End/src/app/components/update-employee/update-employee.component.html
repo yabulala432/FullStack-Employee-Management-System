@@ -1,22 +1,22 @@
 <div class="grid grid-cols-2 container items-center justify-stretch h-screen">
-
-  <div class="border-2 border-green-500 bg-white 
-  rounded-lg m-2 mr-3 p-4 max-w-md  flex-1">
+  <div
+    class="border-2 border-green-500 bg-white rounded-lg m-2 mr-3 p-4 max-w-md flex-1"
+  >
     <div class="change-parent-container">
-      <h1 class="change-parent-heading
-       text-center text-3xl m-5
-        text-green-500"
-        >Change Parent?</h1>
+      <h1 class="change-parent-heading text-center text-3xl m-5 text-green-500">
+        Change Parent?
+      </h1>
 
       <div class="select-container text-gray-950">
         <zorro-form [formGroup]="this.changeParentForm">
           <nz-form-item class="mb-4">
             <nz-form-label class="text-gray-800">Employee</nz-form-label>
             <nz-form-control>
-              <nz-select class="w-full text-gray-800 bg-white border
-                                    border-gray-300 rounded"
-                                    nzPlaceHolder="Select employee"
-                                    formControlName="childEmployee">
+              <nz-select
+                class="w-full text-gray-800 bg-white border border-gray-300 rounded"
+                nzPlaceHolder="Select employee"
+                formControlName="childEmployee"
+              >
                 <nz-option
                   class="option-item"
                   [nzValue]="employee"
@@ -38,46 +38,44 @@
               <nz-select
                 nzPlaceHolder="Select parent"
                 formControlName="parentEmployee"
-                *ngIf="this.parents">
+                *ngIf="this.parents"
+              >
                 <nz-option
                   *ngFor="let parent of parents"
                   [nzValue]="parent"
-                   [nzLabel]="parent"></nz-option>
+                  [nzLabel]="parent"
+                ></nz-option>
               </nz-select>
             </nz-form-control>
           </nz-form-item>
         </zorro-form>
         <button
           (click)="onChangeParent()"
-          class="px-3 py-1 text-sm font-medium
-           text-white bg-orange-500 rounded-md
-            hover:bg-orange-600 focus:outline-none
-             focus:ring-2 focus:ring-orange-500 
-             focus:ring-offset-2">
+          class="px-3 py-1 text-sm font-medium text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+        >
           Change Parent
         </button>
       </div>
     </div>
   </div>
 
-<div class="w-full border-2 bg-white border-green-500 
-rounded-3xl p-4 max-w-md flex-1 justify-center">
+  <div
+    class="w-full border-2 bg-white border-green-500 rounded-3xl p-4 max-w-md flex-1 justify-center"
+  >
     <div class="rounded-lg p-4">
       <zorro-form [formGroup]="this.rolesForm">
         <zorro-form-item>
-          <zorro-form-label 
-          class="change-parent-heading
-       text-center text-3xl m-5
-        text-green-500">
-        Update Roll
-      </zorro-form-label>
+          <zorro-form-label
+            class="change-parent-heading text-center text-3xl m-5 text-green-500"
+          >
+            Update Roll
+          </zorro-form-label>
           <zorro-form-control>
             <select
               formControlName="rolesValue"
-              class="block w-full 
-              mt-1 rounded-md 
-              shadow-sm">
-              <option *ngFor="let role of this.rolesArray">{{role}}</option>
+              class="block w-full mt-1 rounded-md shadow-sm"
+            >
+              <option *ngFor="let role of this.rolesArray">{{ role }}</option>
             </select>
           </zorro-form-control>
         </zorro-form-item>
@@ -88,16 +86,16 @@ rounded-3xl p-4 max-w-md flex-1 justify-center">
             <div class="flex items-center">
               <select
                 formControlName="worksUnderValue"
-                class="block flex-grow mr-2 mt-1 rounded-md shadow-sm">
-                <option *ngFor="let workUnder of this.worksUnderArray">{{workUnder}}</option>
+                class="block flex-grow mr-2 mt-1 rounded-md shadow-sm"
+              >
+                <option *ngFor="let workUnder of this.worksUnderArray">
+                  {{ workUnder }}
+                </option>
               </select>
               <button
                 (click)="onAddClick()"
-                class="px-3 py-1 text-sm font-medium
-                 text-white bg-blue-500 rounded-md
-                  hover:bg-blue-600 focus:outline-none
-                   focus:ring-2 focus:ring-blue-500
-                    focus:ring-offset-2">
+                class="px-3 py-1 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
                 Add
               </button>
             </div>
@@ -110,17 +108,17 @@ rounded-3xl p-4 max-w-md flex-1 justify-center">
             <div class="flex items-center">
               <select
                 formControlName="removeParentValue"
-                class="block flex-grow mr-2 mt-1 rounded-md shadow-sm">
+                class="block flex-grow mr-2 mt-1 rounded-md shadow-sm"
+              >
                 <option value="">Select Parent Role To Remove</option>
-                <option *ngFor="let value of this.removeParentRoleArray">{{value}}</option>
+                <option *ngFor="let value of this.removeParentRoleArray">
+                  {{ value }}
+                </option>
               </select>
               <button
                 (click)="onDeleteClick()"
-                class="px-3 py-1 text-sm font-medium
-                 text-white bg-red-500 rounded-md
-                  hover:bg-red-600 focus:outline-none
-                   focus:ring-2 focus:ring-red-500
-                    focus:ring-offset-2">
+                class="px-3 py-1 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+              >
                 Delete
               </button>
             </div>
@@ -130,6 +128,3 @@ rounded-3xl p-4 max-w-md flex-1 justify-center">
     </div>
   </div>
 </div>
-
-
-

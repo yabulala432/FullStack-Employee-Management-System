@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import { FormControl, FormGroup, Validators} from "@angular/forms";
-import {EmpRoleType, FetchRoleService} from "../../services/fetch-role.service";
-import {FetchEmployeeService} from "../../services/fetch-employee.service";
-import {AddFormValidators} from "./Validator/add-Form.validator";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  EmpRoleType,
+  FetchRoleService,
+} from '../../services/fetch-role.service';
+import { FetchEmployeeService } from '../../services/fetch-employee.service';
+import { AddFormValidators } from './Validator/add-Form.validator';
 
 // interface EmpRole {
 //   role: string;
@@ -12,7 +15,7 @@ import {AddFormValidators} from "./Validator/add-Form.validator";
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
-  styleUrls: ['./add-employee.component.css']
+  styleUrls: ['./add-employee.component.css'],
 })
 export class AddEmployeeComponent implements OnInit {
   rolesArray: any[] = [];
@@ -23,8 +26,7 @@ export class AddEmployeeComponent implements OnInit {
   constructor(
     private fetchRolesService: FetchRoleService,
     private fetchEmployeeService: FetchEmployeeService
-  ) {
-  }
+  ) {}
 
   onFormSubmit() {
     if (this.form.status === 'VALID') {
@@ -52,7 +54,11 @@ export class AddEmployeeComponent implements OnInit {
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    tel: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(12)]),
+    tel: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(12),
+    ]),
     email: new FormControl('', [Validators.required, Validators.email]),
     imageUrl: new FormControl('', [
       Validators.required,
@@ -69,7 +75,6 @@ export class AddEmployeeComponent implements OnInit {
   });
 
   ngOnInit() {
-
     this.fetchRolesService.getAll().subscribe({
       next: (response: any) => {
         for (let role of response) {
@@ -83,11 +88,11 @@ export class AddEmployeeComponent implements OnInit {
         if (value) {
           this.fetchRolesService.findRole(value).subscribe({
             next: (response: any) => {
-
               for (let res of response) {
                 this.reportsToArray = [];
                 for (let value of res.worksUnder)
-                  this.fetchEmployeeService.getEmpNameFromRole(value)
+                  this.fetchEmployeeService
+                    .getEmpNameFromRole(value)
                     .subscribe({
                       next: (response: any) => {
                         for (let res of response) {
@@ -129,12 +134,11 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   resetForm() {
-    const values = ["name", 'role', 'reportsTo', 'imageUrl', 'tel', 'email',];
+    const values = ['name', 'role', 'reportsTo', 'imageUrl', 'tel', 'email'];
     values.map((val) => {
       // this.form.get(val)?.setValue('');
       this.form.get(val)?.reset();
     });
-
   }
 
   addRole() {

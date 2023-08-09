@@ -1,28 +1,85 @@
-import { EmployeeModel } from './../../models/employee.model';
-import { Component, OnInit } from '@angular/core';
-import { FetchRoleService } from '../../services/fetch-role.service';
-import { FetchEmployeeService } from '../../services/fetch-employee.service';
-import { EmployeeRole } from '../../models/employeeRole';
-import { FormControl, FormGroup } from '@angular/forms';
-// import { EmployeeModel } from '../../models/employee.model';
+import { OnInit, Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { EmployeeModel } from 'src/app/models/employee.model';
+import { EmployeeRole } from 'src/app/models/employeeRole';
+import { FetchEmployeeService } from 'src/app/services/fetch-employee.service';
+import { FetchRoleService } from 'src/app/services/fetch-role.service';
 
 interface Employee {
+  _id: string;
   name: string;
   role: string;
-  imageUrl?: string;
-  tel?: string;
-  email?: string;
+  imageUrl: string;
+  tel: string;
+  email: string;
+  pid?: string;
   children?: Employee[];
 }
 
 @Component({
-  selector: 'app-update-employee',
-  templateUrl: './update-employee.component.html',
-  styleUrls: ['./update-employee.component.css'],
+  selector: 'app-tree-view',
+  templateUrl: './tree-view.component.html',
+  styleUrls: ['./tree-view.component.css'],
 })
-export class UpdateEmployeeComponent implements OnInit {
-  employees: string[] = [];
+export class TreeViewComponent implements OnInit {
+  selectedData!: {
+    email: string;
+    role: string;
+    name: string;
+    tel: string;
+  };
 
+  findEmployee(data: Employee[], role: string, name: string): Employee[] {
+    let result: Employee[] = [];
+
+    for (const employee of data) {
+      if (employee.role === role && employee.name === name) {
+        result.push(employee);
+      }
+
+      if (employee.children && employee.children.length > 0) {
+        const childrenResult = this.findEmployee(employee.children, role, name);
+        result = result.concat(childrenResult);
+      }
+    }
+
+    return result;
+  }
+
+  showOtherInfo(role: string, name: string) {
+    const value = this.findEmployee(this.data, role, name);
+    let dat: {
+      email: string;
+      role: string;
+      name: string;
+      tel: string;
+    } = { email: '', role: '', name: '', tel: '' };
+    dat.name = value[0].name;
+    dat.role = value[0].role;
+    dat.tel = value[0]?.tel ? value[0]?.tel : 'No tel';
+    dat.email = value[0]?.email ? value[0]?.email : 'No email';
+
+    this.selectedData = dat;
+
+    this.fetchEmp.getIdFromName(this.selectedData.name).subscribe({
+      next: (response) => {
+        this.fetchEmp
+          .getEmployeeExcludingDescendants(response as string)
+          .subscribe({
+            next: (response) => {
+              this.parents = [];
+              (response as EmployeeModel[]).map((value) => {
+                if (this.selectedData.name != value.name)
+                  this.parents.push(value.name);
+              });
+            },
+          });
+      },
+    });
+  }
+
+  data: Employee[] = [];
+  employees: string[] = [];
   parents: string[] = [];
   rolesArray: string[] = [];
   worksUnderArray: string[] = [];
@@ -66,35 +123,8 @@ export class UpdateEmployeeComponent implements OnInit {
         (response as EmployeeModel[]).map((value) => {
           this.employees.push(value.name);
         });
-
-        // this.roleHierarchy = this.renderData([
-        //   this.fetchEmp.transformData(response as EmployeeModel[]),
-        // ]);
-      },
-    });
-
-    this.childEmployee?.valueChanges.subscribe({
-      next: (responsed) => {
-        this.parents = [];
-        if (responsed) {
-          this.fetchEmp.getIdFromName(responsed).subscribe({
-            next: (response) => {
-              this.fetchEmp
-                .getEmployeeExcludingDescendants(response as string)
-                .subscribe({
-                  next: (response) => {
-                    (response as EmployeeModel[]).map((value) => {
-                      if (responsed != value.name) {
-                        this.parents.push(value.name);
-                      } else {
-                        console.log(responsed, value.name);
-                      }
-                    });
-                  },
-                });
-            },
-          });
-        }
+        this.data = [this.fetchEmp.transformData(response as EmployeeModel[])];
+        console.log(this.data);
       },
     });
   }
@@ -160,6 +190,7 @@ export class UpdateEmployeeComponent implements OnInit {
   }
 
   onChangeParent() {
+    this.childEmployee?.setValue(this.selectedData.name);
     console.log(this.childEmployee?.value, this.parentEmployee?.value);
     if (this.childEmployee?.value && this.parentEmployee?.value) {
       this.fetchEmp
@@ -178,63 +209,4 @@ export class UpdateEmployeeComponent implements OnInit {
         });
     }
   }
-
-  data: Employee[] = [
-    {
-      name: 'Yeabsira Yonas',
-      role: 'CEO',
-      children: [
-        {
-          name: 'Asegid Lewoyehu',
-          role: 'CTO',
-          children: [
-            {
-              name: 'Kebede Abebe',
-              role: 'Project Manager',
-              children: [
-                {
-                  name: 'Nardos Shtaye',
-                  role: 'Product Owner',
-                },
-                {
-                  name: 'Yeabsira Yonas under COO',
-                  role: 'Product Owner',
-                },
-              ],
-            },
-            {
-              name: 'BABULA BEREBELA',
-              role: 'Tech Lead',
-              children: [
-                {
-                  name: 'Test one Two',
-                  role: 'Front End Dev',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          name: 'Seble Lewoyehu',
-          role: 'COO',
-          children: [
-            {
-              name: 'Tech-lead Uno',
-              role: 'Tech Lead',
-              children: [
-                {
-                  name: 'jklsdfjklaf',
-                  role: 'HR',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          name: 'Kidus Megersa',
-          role: 'Tech Lead',
-        },
-      ],
-    },
-  ];
 }

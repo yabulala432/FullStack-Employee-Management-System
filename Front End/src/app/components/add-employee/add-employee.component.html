@@ -1,7 +1,5 @@
-
-<div class="items-center
-grid grid-cols-2 gap-2 overflow-y-scroll">
-  <div class="bg-gray-100 shadow-md px-8 pt-6 pb-8 rounded-r-3xl ">
+<div class="items-center grid grid-cols-2 gap-2 overflow-y-scroll">
+  <div class="bg-gray-100 shadow-md px-8 pt-6 pb-8 rounded-r-3xl">
     <div class="mb-4">
       <h1 class="text-2xl font-bold mb-2">Add Employee</h1>
     </div>
@@ -20,12 +18,11 @@ grid grid-cols-2 gap-2 overflow-y-scroll">
           id="role"
           name="role"
           formControlName="role"
-          class="shadow appearance-none border rounded w-full
-           py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         >
-          <option value="">Select Role First</option>
+          <!-- <option value=""></option> -->
           <option *ngFor="let rol of this.rolesArray">
-            {{ rol }}
+            {{ rol == "CEO" ? "Select Role First" : rol }}
           </option>
         </select>
       </div>
@@ -43,9 +40,7 @@ grid grid-cols-2 gap-2 overflow-y-scroll">
         <select
           id="reports-to"
           name="reports-to"
-          class="shadow appearance-none border rounded
-           w-full py-2 px-3 text-gray-700 leading-tight
-           focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           formControlName="reportsTo"
         >
           <!-- Add your options here -->
@@ -145,9 +140,7 @@ grid grid-cols-2 gap-2 overflow-y-scroll">
     </form>
   </div>
   <div class="bg-blue-100 shadow-lg px-8 pt-6 pb-8 rounded-r-4xl">
-    <div
-      class="flex items-center justify-center w-10 bg-blue-500 rounded-full"
-    >
+    <div class="flex items-center justify-center w-10 bg-blue-500 rounded-full">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -169,25 +162,25 @@ grid grid-cols-2 gap-2 overflow-y-scroll">
         <label class="block text-gray-700 font-bold mb-2" for="roleToAdd">
           Name of the Role
         </label>
-        <input class="shadow appearance-none border
-          rounded w-full py-2 px-3 text-gray-700 leading-tight
-           focus:outline-none focus:shadow-outline"
-               id="roleToAdd"
-               type="text"
-               name="name"
-               placeholder="Enter role"
-               [(ngModel)]="this.roleTobeAdded">
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="roleToAdd"
+          type="text"
+          name="name"
+          placeholder="Enter role"
+          [(ngModel)]="this.roleTobeAdded"
+        />
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="reportTo">
           Reports To
         </label>
-        <select class="shadow appearance-none border rounded w-full
-           py-2 px-3 text-gray-700 leading-tight focus:outline-none
-           focus:shadow-outline"
-                id="reportTo"
-                name="reportTo"
-                [(ngModel)]="this.reportsToAdd">
+        <select
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="reportTo"
+          name="reportTo"
+          [(ngModel)]="this.reportsToAdd"
+        >
           <option value="">Select Role First</option>
           <option *ngFor="let rol of this.rolesArray">
             {{ rol }}
@@ -195,10 +188,11 @@ grid grid-cols-2 gap-2 overflow-y-scroll">
         </select>
       </div>
       <div class="flex items-center justify-between">
-        <button class="bg-blue-500 hover:bg-blue-700
-          text-white font-bold py-2 px-4 rounded
-          focus:outline-none focus:shadow-outline" type="button"
-                (click)="this.addRole()">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="button"
+          (click)="this.addRole()"
+        >
           Add Role
         </button>
       </div>

@@ -84,7 +84,7 @@ export class InfoEmployeeComponent implements OnInit {
 
   form = this.fb.group({
     name: ['', [Validators.required]],
-    role: ['', [Validators.required]],
+    // role: ['', [Validators.required]],
     email: ['', [Validators.required]],
     tel: ['', [Validators.required]],
     imageUrl: ['', [Validators.required]],

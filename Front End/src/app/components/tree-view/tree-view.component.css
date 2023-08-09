@@ -1,0 +1,55 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid #ccc;
+  background-color: #f9f9f9;
+  list-style-type: none;
+}
+
+li {
+  padding: 10px;
+  padding-left: 20px;
+  border-bottom: 1px solid #ccc;
+  color: black;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+li > i:hover {
+  background-color: #ddd;
+  cursor: pointer;
+  /* font-size: large; */
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li:before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #c0b8b8; /* Replace with your desired background color */
+  border-radius: -50%;
+  margin-right: 5px;
+}
+
+nz-option {
+  color: black;
+}
+nz-select {
+  color: black;
+}
+select {
+  color: black;
+  padding: 6px;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

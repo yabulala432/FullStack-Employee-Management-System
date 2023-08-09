@@ -1,0 +1,193 @@
+<div nz-row>
+  <div nz-col>
+    <ul>
+      <ng-container *ngFor="let employee of data">
+        <li (click)="showOtherInfo(employee.role, employee.name)">
+          <i>{{ employee.name }} -> {{ employee.role }}</i>
+        </li>
+        <ng-container *ngIf="employee.children && employee.children.length > 0">
+          <ul>
+            <ng-container
+              *ngTemplateOutlet="
+                recursiveList;
+                context: { $implicit: employee.children }
+              "
+            ></ng-container>
+          </ul>
+        </ng-container>
+      </ng-container>
+    </ul>
+
+    <ng-template #recursiveList let-employees>
+      <li *ngFor="let employee of employees">
+        <i
+          [style.paddingLeft]="'20px'"
+          (click)="showOtherInfo(employee.role, employee.name)"
+          >{{ employee.name }} -> {{ employee.role }}</i
+        >
+        <ng-container *ngIf="employee.children && employee.children.length > 0">
+          <ul>
+            <ng-container
+              *ngTemplateOutlet="
+                recursiveList;
+                context: { $implicit: employee.children }
+              "
+            ></ng-container>
+          </ul>
+        </ng-container>
+      </li>
+    </ng-template>
+  </div>
+
+  <div *ngIf="this.selectedData" nz-col>
+    <div nz-row>
+      <!-- <div nz-col>
+        name: {{ this.selectedData.name }} <br />
+        role: {{ this.selectedData.role }} <br />
+        tel: {{ this.selectedData.tel }} <br />
+      </div> -->
+      <div nz-col class="row container items-center">
+        <div nz-row>
+          <div
+            nz-col
+            class="col-1 border-2 border-green-500 bg-white rounded-lg m-2 mr-3 p-4 max-w-md flex-1"
+          >
+            <div class="change-parent-container">
+              <h1
+                class="change-parent-heading text-center text-3xl m-5 text-green-500"
+              >
+                Change Parent?
+              </h1>
+
+              <div class="select-container text-gray-950">
+                <zorro-form [formGroup]="this.changeParentForm">
+                  <nz-form-item class="mb-4">
+                    <nz-form-label class="text-gray-800"
+                      >Employee</nz-form-label
+                    >
+                    <nz-form-control>
+                      <nz-select
+                        class="w-full text-gray-800 bg-white border border-gray-300 rounded"
+                        [textContent]="this.selectedData.name"
+                        formControlName="childEmployee"
+                      >
+                        <nz-option
+                          class="option-item"
+                          [nzValue]="employee"
+                          *ngFor="let employee of employees"
+                          [nzLabel]="employee"
+                        >
+                        </nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <div class="arrow-container">
+                    <i nz-icon nzType="arrow-down" nzTheme="outline"></i>
+                  </div>
+
+                  <nz-form-item class="mb-4">
+                    <nz-form-label>Parent</nz-form-label>
+                    <nz-form-control>
+                      <nz-select
+                        nzPlaceHolder="Select parent"
+                        formControlName="parentEmployee"
+                        *ngIf="this.parents"
+                      >
+                        <nz-option
+                          *ngFor="let parent of parents"
+                          [nzValue]="parent"
+                          [nzLabel]="parent"
+                        ></nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+                </zorro-form>
+                <button
+                  (click)="onChangeParent()"
+                  class="px-3 py-1 text-sm font-medium text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                >
+                  Change Parent
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            nz-col
+            class="col-1 w-full border-2 bg-white border-green-500 rounded-3xl p-4 max-w-md flex-1 justify-center"
+          >
+            <div class="rounded-lg p-4">
+              <zorro-form [formGroup]="this.rolesForm">
+                <zorro-form-item>
+                  <zorro-form-label
+                    class="change-parent-heading text-center text-3xl m-5 text-green-500"
+                  >
+                    Update Roll
+                  </zorro-form-label>
+                  <zorro-form-control>
+                    <select
+                      formControlName="rolesValue"
+                      class="block w-full mt-1 rounded-md shadow-sm"
+                    >
+                      <option *ngFor="let role of this.rolesArray">
+                        {{ role }}
+                      </option>
+                    </select>
+                  </zorro-form-control>
+                </zorro-form-item>
+
+                <zorro-form-item>
+                  <zorro-form-label>Add Works Under Role:</zorro-form-label>
+                  <zorro-form-control>
+                    <div class="flex items-center">
+                      <select
+                        formControlName="worksUnderValue"
+                        class="block flex-grow mr-2 mt-1 rounded-md shadow-sm"
+                      >
+                        <option *ngFor="let workUnder of this.worksUnderArray">
+                          {{ workUnder }}
+                        </option>
+                      </select>
+                      <button
+                        (click)="onAddClick()"
+                        class="px-3 py-1 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </zorro-form-control>
+                </zorro-form-item>
+
+                <zorro-form-item>
+                  <zorro-form-label>Remove WorksUnder Role:</zorro-form-label>
+                  <zorro-form-control>
+                    <div class="flex items-center">
+                      <select
+                        formControlName="removeParentValue"
+                        class="block flex-grow mr-2 mt-1 rounded-md shadow-sm"
+                      >
+                        <option value="">Select Parent Role To Remove</option>
+                        <option
+                          *ngFor="let value of this.removeParentRoleArray"
+                        >
+                          {{ value }}
+                        </option>
+                      </select>
+                      <button
+                        (click)="onDeleteClick()"
+                        class="px-3 py-1 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </zorro-form-control>
+                </zorro-form-item>
+              </zorro-form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
